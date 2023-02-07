@@ -1,5 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
 
@@ -14,12 +13,9 @@ import {
   UncheckedHandle,
 } from 'styles/Theme.styled';
 
-import { current } from 'redux/auth/auth-operations';
 import PrivateRoutes from './Routes/PrivateRoutes';
 import PublicRoutes from './Routes/PublicRoutes';
 import Loader from 'components/Loader/Loader';
-import { fetchCategories } from '../redux/categories/categories-operations.js';
-import { getIsLogin } from 'redux/auth/auth-selectors';
 
 const LoginPage = lazy(() => import('pages/AuthPage/LoginPage/LoginPage'));
 const RegistrationPage = lazy(() =>
@@ -37,9 +33,6 @@ const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 export const App = () => {
   const [theme, setTheme] = useLocalStorage('theme', 'light');
   const [isChecked, setIsChecked] = useLocalStorage('themeBtn', true);
-  const isLogin = useSelector(getIsLogin);
-
-  const dispatch = useDispatch();
 
   const isDarkTheme = theme === 'dark';
 
@@ -47,16 +40,6 @@ export const App = () => {
     setTheme(isDarkTheme ? 'light' : 'dark');
     setIsChecked(!isChecked);
   };
-
-  useEffect(() => {
-    dispatch(current());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (isLogin) {
-      dispatch(fetchCategories());
-    }
-  }, [dispatch, isLogin]);
 
   return (
     <ThemeProvider theme={isDarkTheme ? dark : light}>
