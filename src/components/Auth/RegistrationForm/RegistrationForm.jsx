@@ -48,14 +48,14 @@ const RegistrationForm = () => {
       .required(`${t('registrationForm.password_required')}`)
       .min(6, `${t('registrationForm.password_min')}`)
       .max(16, `${t('registrationForm.password_max')}`)
-      .matches( 
+      .matches(
         passwordRegexp.lettersFull,
         // /^.*(?=.{6,})((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
         `${t('registrationForm.password_matchesFull')}`,
       )
       .matches(
         passwordRegexp.numbers,
-        // /^.*(?=.*\d).*$/, 
+        // /^.*(?=.*\d).*$/,
         `${t('registrationForm.password_matchesNum')}`),
     confirmPassword: yup
       .string()
