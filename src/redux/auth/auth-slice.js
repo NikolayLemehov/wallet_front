@@ -109,6 +109,9 @@ const auth = createSlice({
     },
 
     [current.rejected]: (store, { payload }) => {
+      store.user = initialState.user;
+      store.token = initialState.token;
+      store.isLogin = initialState.isLogin;
       store.firstLoading = false;
       store.loading = false;
       store.error = payload;
