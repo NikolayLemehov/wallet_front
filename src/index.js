@@ -13,6 +13,8 @@ import { persistor, store } from 'redux/store';
 import './i18n.js';
 import 'styles/fonts/fonts.css';
 
+console.log('start::');
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter basename='/wallet_front'>
